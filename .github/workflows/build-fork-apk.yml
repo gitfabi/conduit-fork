@@ -1,0 +1,55 @@
+name: Build fork APK
+
+# Manual build of a signed, side-by-side Android APK for a personal fork.
+# Needs two repository secrets (see docs in the notes that came with this branch):
+#   ANDROID_KEYSTORE_BASE64         base64 of the .jks keystore
+#   ANDROID_KEY_PROPERTIES_BASE64   base64 of key.properties
+on:
+  workflow_dispatch:
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Fetch third_party submodules
+        run: git submodule update --init --recursive --depth 1 third_party/katex third_party/mermaid
+      - run: flutter pub get
+      - name: Generate code
+        shell: bash
+        run: |
+          dart run build_runner build
+          for dir in packages/*; do
+            if [ -f "$dir/pubspec.yaml" ] && grep -q '^  build_runner:' "$dir/pubspec.yaml"; then
+              (cd "$dir" && dart run build_runner build)
+            fi
+          done
+      - name: Install side by side with the Play Store app
+        run: sed -i 's/applicationId = "app.cogwheel.conduit"/applicationId = "app.cogwheel.conduit.custom"/' android/app/build.gradle.kts
+      - name: Create keystore
+        working-directory: android
+        env:
+          KS: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KP: ${{ secrets.ANDROID_KEY_PROPERTIES_BASE64 }}
+        run: |
+          test -n "$KS" -a -n "$KP" || { echo "Set the two keystore secrets first."; exit 1; }
+          echo "$KS" | base64 --decode > app/conduit-keystore.jks
+          echo "$KP" | base64 --decode > key.properties
+      - name: Build APK
+        run: flutter build apk --split-per-abi --target-platform android-arm64 --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: conduit-custom-arm64
+          path: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
