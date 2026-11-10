@@ -124,6 +124,11 @@ String? mimeTypeFromFileNameForTest(String fileName) {
   return _getMimeTypeFromFileName(fileName);
 }
 
+@visibleForTesting
+List<Map<String, dynamic>> contextAttachmentsToFilesForTest(
+  List<ChatContextAttachment> attachments,
+) => _contextAttachmentsToFiles(attachments);
+
 List<Map<String, dynamic>> _contextAttachmentsToFiles(
   List<ChatContextAttachment> attachments,
 ) {
@@ -174,6 +179,14 @@ List<Map<String, dynamic>> _contextAttachmentsToFiles(
           if (attachment.url != null) 'source': attachment.url,
         };
         return map;
+      case ChatContextAttachmentType.knowledgeBase:
+        // A whole knowledge base is a `collection` item; the server resolves
+        // it from `id`, as for the web client's `#` selection.
+        return <String, dynamic>{
+          'type': 'collection',
+          'id': attachment.fileId ?? attachment.id,
+          'name': attachment.displayName,
+        };
       case ChatContextAttachmentType.note:
         return <String, dynamic>{
           'type': 'note',

@@ -198,6 +198,7 @@
     "description": "Alternative empty-state description."
   },
   "knowledgeBase": "ナレッジベース",
+  "knowledgeUseEntireBase": "ナレッジベース全体を使う",
   "@knowledgeBase": {
     "description": "Section for knowledge base content."
   },
@@ -660,6 +661,8 @@
     "description": "Guidance shown when the voice call encounters an error."
   },
   "messageHintText": "Conduit に質問",
+  "messageHintModel": "{model}にメッセージ",
+  "@messageHintModel": {"placeholders": {"model": {"type": "String"}}},
   "@messageHintText": {
     "description": "Short placeholder text in the message input."
   },

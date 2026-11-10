@@ -393,6 +393,10 @@
   "@knowledgeBase": {
     "description": "Section for knowledge base content."
   },
+  "knowledgeUseEntireBase": "Use entire knowledge base",
+  "@knowledgeUseEntireBase": {
+    "description": "First row in the knowledge picker that attaches the whole selected knowledge base instead of one file."
+  },
   "attachments": "Attachments",
   "@attachments": {
     "description": "Header above list of attached files in compose area."
@@ -900,6 +904,16 @@
   "messageHintText": "Ask Conduit",
   "@messageHintText": {
     "description": "Short placeholder text in the message input."
+  },
+  "messageHintModel": "Message {model}",
+  "@messageHintModel": {
+    "description": "Placeholder in the empty message input naming the selected model.",
+    "placeholders": {
+      "model": {
+        "type": "String",
+        "example": "GPT-5"
+      }
+    }
   },
   "stopGenerating": "Stop Generating",
   "@stopGenerating": {

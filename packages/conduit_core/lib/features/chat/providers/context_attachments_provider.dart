@@ -68,6 +68,28 @@ class ContextAttachmentsNotifier extends Notifier<List<ChatContextAttachment>> {
     );
   }
 
+  /// Attaches a whole knowledge base, as the web client's `#` list does for a
+  /// collection. Attaching the same base twice keeps one chip.
+  void addKnowledgeBase({required String baseId, required String displayName}) {
+    final alreadyAttached = state.any(
+      (attachment) =>
+          attachment.type == ChatContextAttachmentType.knowledgeBase &&
+          attachment.fileId == baseId,
+    );
+    if (alreadyAttached) {
+      return;
+    }
+
+    add(
+      ChatContextAttachment(
+        id: const Uuid().v4(),
+        type: ChatContextAttachmentType.knowledgeBase,
+        displayName: displayName,
+        fileId: baseId,
+      ),
+    );
+  }
+
   void addNote({required String noteId, required String displayName}) {
     final alreadyAttached = state.any(
       (attachment) =>

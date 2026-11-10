@@ -381,6 +381,7 @@
     "description": "Alternative empty-state description."
   },
   "knowledgeBase": "Baza wiedzy",
+  "knowledgeUseEntireBase": "Użyj całej bazy wiedzy",
   "@knowledgeBase": {
     "description": "Section for knowledge base content."
   },
@@ -876,6 +877,8 @@
     "description": "Guidance shown when the voice call encounters an error."
   },
   "messageHintText": "Zapytaj Conduit",
+  "messageHintModel": "Wiadomość do {model}",
+  "@messageHintModel": {"placeholders": {"model": {"type": "String"}}},
   "@messageHintText": {
     "description": "Short placeholder text in the message input."
   },

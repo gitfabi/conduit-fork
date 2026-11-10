@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../shared/theme/theme_extensions.dart';
+import 'message_timestamp_label.dart';
 import '../../../shared/widgets/markdown/streaming_markdown_widget.dart';
 import '../../../shared/widgets/markdown/renderer/markdown_style.dart';
 
@@ -2509,6 +2510,10 @@ class _AssistantMessageWidgetState extends ConsumerState<AssistantMessageWidget>
                 )
               : buttonRow,
         ...infoWidgets,
+        // Inline in the action row, so a finished reply keeps the height the
+        // typing indicator it replaces had.
+        if (messageTimestampOf(widget.message) case final timestamp?)
+          MessageTimestampLabel(timestamp: timestamp),
       ],
     );
   }

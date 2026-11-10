@@ -198,6 +198,7 @@
     "description": "Alternative empty-state description."
   },
   "knowledgeBase": "Znalostní báze",
+  "knowledgeUseEntireBase": "Použít celou znalostní bázi",
   "@knowledgeBase": {
     "description": "Section for knowledge base content."
   },
@@ -660,6 +661,8 @@
     "description": "Guidance shown when the voice call encounters an error."
   },
   "messageHintText": "Zeptat se Conduitu",
+  "messageHintModel": "Zpráva pro {model}",
+  "@messageHintModel": {"placeholders": {"model": {"type": "String"}}},
   "@messageHintText": {
     "description": "Short placeholder text in the message input."
   },
