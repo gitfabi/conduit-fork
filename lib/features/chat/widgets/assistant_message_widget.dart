@@ -1635,10 +1635,6 @@ class _AssistantMessageWidgetState extends ConsumerState<AssistantMessageWidget>
         // under its last line (its 44 pt targets already leave about 13 pt
         // of air over the glyphs), and the block's usual gap follows it.
         children.add(footer);
-        final timestamp = messageTimestampOf(widget.message);
-        if (timestamp != null) {
-          children.add(MessageTimestampLabel(timestamp: timestamp));
-        }
       }
       if (hasFollowUps) {
         // The action row's 44 pt targets and each suggestion's own 44 pt row
@@ -2514,6 +2510,10 @@ class _AssistantMessageWidgetState extends ConsumerState<AssistantMessageWidget>
                 )
               : buttonRow,
         ...infoWidgets,
+        // Inline in the action row, so a finished reply keeps the height the
+        // typing indicator it replaces had.
+        if (messageTimestampOf(widget.message) case final timestamp?)
+          MessageTimestampLabel(timestamp: timestamp),
       ],
     );
   }
