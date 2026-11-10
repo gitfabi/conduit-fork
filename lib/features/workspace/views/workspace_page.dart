@@ -615,7 +615,12 @@ Widget _workspaceExitButton(BuildContext context) {
         if (context.canPop()) {
           context.pop();
         } else {
-          context.go(Routes.profile);
+          // An editor's `go` can leave only Workspace on the stack. Rebuild
+          // chat -> Account so Account keeps a way out instead of becoming the
+          // sole route.
+          final router = GoRouter.of(context);
+          router.go(Routes.chat);
+          unawaited(router.push<void>(Routes.profile));
         }
       },
     ),
