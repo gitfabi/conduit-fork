@@ -171,6 +171,8 @@
   "voiceActionStop": "Стоп",
   "voiceActionStart": "Начать",
   "messageHintText": "Спросите Conduit",
+  "messageHintModel": "Сообщение для {model}",
+  "@messageHintModel": {"placeholders": {"model": {"type": "String"}}},
   "stopGenerating": "Остановить генерацию",
   "codeCopiedToClipboard": "Код скопирован в буфер обмена.",
   "send": "Отправить",

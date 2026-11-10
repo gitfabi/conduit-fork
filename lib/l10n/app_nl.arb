@@ -165,6 +165,8 @@
   "voiceActionStop": "Stop",
   "voiceActionStart": "Start",
   "messageHintText": "Vraag Conduit",
+  "messageHintModel": "Bericht aan {model}",
+  "@messageHintModel": {"placeholders": {"model": {"type": "String"}}},
   "stopGenerating": "Stop met genereren",
   "codeCopiedToClipboard": "Code gekopieerd naar klembord.",
   "send": "Verzenden",

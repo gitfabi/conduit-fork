@@ -876,6 +876,8 @@
     "description": "Guidance shown when the voice call encounters an error."
   },
   "messageHintText": "Zapytaj Conduit",
+  "messageHintModel": "Wiadomość do {model}",
+  "@messageHintModel": {"placeholders": {"model": {"type": "String"}}},
   "@messageHintText": {
     "description": "Short placeholder text in the message input."
   },

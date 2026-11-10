@@ -1760,6 +1760,21 @@ class _ModernChatInputState extends ConsumerState<ModernChatInput>
     });
   }
 
+  /// The selected model's name, kept current by [build] so the empty-input
+  /// hint can name it from the layout helpers that run outside build.
+  String? _hintModelName;
+
+  /// The empty composer's hint: the caller's override, else "Message {model}"
+  /// once a model is selected, else the generic prompt.
+  String _emptyHint(AppLocalizations l10n) {
+    final override = widget.placeholder;
+    if (override != null) return override;
+    final name = _hintModelName?.trim();
+    return name == null || name.isEmpty
+        ? l10n.messageHintText
+        : l10n.messageHintModel(name);
+  }
+
   void _recomputeComposerLineState() {
     final text = _controller.text;
     final l10n = AppLocalizations.of(context)!;
@@ -1769,7 +1784,7 @@ class _ModernChatInputState extends ConsumerState<ModernChatInput>
         ? l10n.transcribingAudio
         : _isRecording
         ? l10n.recordingAudio
-        : widget.placeholder ?? l10n.messageHintText;
+        : _emptyHint(l10n);
     final lineCount = _composerTextLineCount(layoutText);
     final isMultiline = lineCount > 1;
     final showExpand = _shouldShowComposerExpandButton(lineCount);
@@ -1851,7 +1866,7 @@ class _ModernChatInputState extends ConsumerState<ModernChatInput>
         ? l10n.transcribingAudio
         : _isRecording
         ? l10n.recordingAudio
-        : widget.placeholder ?? l10n.messageHintText;
+        : _emptyHint(l10n);
     final int lineCount = _composerTextLineCount(layoutText);
     final bool isMultiline = lineCount > 1;
     final bool showExpand = _shouldShowComposerExpandButton(lineCount);
@@ -3586,6 +3601,9 @@ class _ModernChatInputState extends ConsumerState<ModernChatInput>
 
   @override
   Widget build(BuildContext context) {
+    _hintModelName = ref.watch(
+      selectedModelProvider.select((model) => model?.name),
+    );
     ref.listen<bool>(composerAutofocusEnabledProvider, (previous, next) {
       if ((previous ?? true) && !next) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -4817,8 +4835,7 @@ class _ModernChatInputState extends ConsumerState<ModernChatInput>
                   ? AppLocalizations.of(context)!.transcribingAudio
                   : _isRecording
                   ? AppLocalizations.of(context)!.recordingAudio
-                  : widget.placeholder ??
-                        AppLocalizations.of(context)!.messageHintText;
+                  : _emptyHint(AppLocalizations.of(context)!);
 
               // IMPORTANT: Always use TextInputAction.newline for multiline
               // chat input. Using TextInputAction.send causes issues with
@@ -5842,7 +5859,7 @@ class _ModernChatInputState extends ConsumerState<ModernChatInput>
         final result = await NativeSheetBridge.instance.presentTextEditor(
           title: widget.placeholder ?? l10n.sendMessage,
           value: _controller.text,
-          placeholder: widget.placeholder ?? l10n.messageHintText,
+          placeholder: _emptyHint(l10n),
           sendLabel: _queuesInsteadOfSending
               ? l10n.queueDraftAction
               : l10n.send,
