@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../shared/theme/theme_extensions.dart';
+import 'message_timestamp_label.dart';
 import '../../../shared/widgets/markdown/streaming_markdown_widget.dart';
 import '../../../shared/widgets/markdown/renderer/markdown_style.dart';
 
@@ -1634,6 +1635,10 @@ class _AssistantMessageWidgetState extends ConsumerState<AssistantMessageWidget>
         // under its last line (its 44 pt targets already leave about 13 pt
         // of air over the glyphs), and the block's usual gap follows it.
         children.add(footer);
+        final timestamp = messageTimestampOf(widget.message);
+        if (timestamp != null) {
+          children.add(MessageTimestampLabel(timestamp: timestamp));
+        }
       }
       if (hasFollowUps) {
         // The action row's 44 pt targets and each suggestion's own 44 pt row
