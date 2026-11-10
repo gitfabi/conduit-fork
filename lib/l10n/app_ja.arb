@@ -198,6 +198,7 @@
     "description": "Alternative empty-state description."
   },
   "knowledgeBase": "ナレッジベース",
+  "knowledgeUseEntireBase": "ナレッジベース全体を使う",
   "@knowledgeBase": {
     "description": "Section for knowledge base content."
   },

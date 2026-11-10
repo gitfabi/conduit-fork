@@ -55,6 +55,7 @@
   "noItems": "无项目",
   "noItemsToDisplay": "无可显示的项目",
   "knowledgeBase": "知识库",
+  "knowledgeUseEntireBase": "使用整个知识库",
   "attachments": "附件",
   "files": "文件",
   "takePhoto": "拍照",

@@ -55,6 +55,7 @@
   "noItems": "無項目",
   "noItemsToDisplay": "無可顯示的項目",
   "knowledgeBase": "知識庫",
+  "knowledgeUseEntireBase": "使用整個知識庫",
   "attachments": "附件",
   "files": "檔案",
   "takePhoto": "拍照",

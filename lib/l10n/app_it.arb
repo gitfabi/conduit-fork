@@ -55,6 +55,7 @@
   "noItems": "Nessun elemento",
   "noItemsToDisplay": "Nessun elemento da visualizzare",
   "knowledgeBase": "Base di conoscenza",
+  "knowledgeUseEntireBase": "Usa l'intera knowledge base",
   "attachments": "Allegati",
   "files": "File",
   "takePhoto": "Scatta una foto",

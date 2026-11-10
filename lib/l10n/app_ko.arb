@@ -96,6 +96,7 @@
   "noItems": "항목 없음",
   "noItemsToDisplay": "표시할 항목이 없습니다",
   "knowledgeBase": "지식 베이스",
+  "knowledgeUseEntireBase": "전체 지식 베이스 사용",
   "attachments": "첨부 파일",
   "files": "파일",
   "takePhoto": "사진 촬영",

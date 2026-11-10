@@ -198,6 +198,7 @@
     "description": "Alternative empty-state description."
   },
   "knowledgeBase": "Znalostná báza",
+  "knowledgeUseEntireBase": "Použiť celú znalostnú bázu",
   "@knowledgeBase": {
     "description": "Section for knowledge base content."
   },

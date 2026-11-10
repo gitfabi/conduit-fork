@@ -393,6 +393,10 @@
   "@knowledgeBase": {
     "description": "Section for knowledge base content."
   },
+  "knowledgeUseEntireBase": "Use entire knowledge base",
+  "@knowledgeUseEntireBase": {
+    "description": "First row in the knowledge picker that attaches the whole selected knowledge base instead of one file."
+  },
   "attachments": "Attachments",
   "@attachments": {
     "description": "Header above list of attached files in compose area."
