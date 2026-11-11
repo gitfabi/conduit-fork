@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Personal build: orange launcher background so it differs from the Play Store app. -->
+    <color name="conduit_custom_icon_background">#E8590C</color>
+
     <!-- Material 3 Widget Colors (Light Mode) -->
     
     <!-- Primary colors for main button -->

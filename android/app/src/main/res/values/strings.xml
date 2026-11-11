@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Conduit</string>
+    <string name="app_name">Conduit Custom</string>
     
     <!-- Widget strings -->
     <string name="widget_name">Conduit</string>
