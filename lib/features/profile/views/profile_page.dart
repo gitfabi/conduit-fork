@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:conduit/shared/widgets/platform_ui/platform_ui.dart';
 
 import 'package:material_ui/material_ui.dart';
@@ -85,33 +86,48 @@ class ProfilePage extends ConsumerWidget {
     // Use the same floating back control as the settings subpages so the
     // hub and its destinations share one toolbar style.
     final backLabel = MaterialLocalizations.of(context).backButtonTooltip;
-    final backButton = Navigator.of(context).canPop()
-        ? AdaptiveTooltip(
-            message: backLabel,
-            child: ConduitAdaptiveAppBarIconButton(
-              icon: context.usesCupertinoChrome
-                  ? CupertinoIcons.chevron_back
-                  : Icons.arrow_back,
-              semanticLabel: backLabel,
-              onPressed: () => Navigator.of(context).maybePop(),
-            ),
-          )
-        : null;
+    // A `go` elsewhere can leave this page as the only route. Keep an exit
+    // anyway: without it the arrow is missing and system back closes the app.
+    final canPop = Navigator.of(context).canPop();
+    void leave() {
+      if (canPop) {
+        unawaited(Navigator.of(context).maybePop());
+      } else {
+        unawaited(NavigationService.navigateToChat());
+      }
+    }
 
-    return AdaptiveRouteShell(
-      backgroundColor: context.conduitTheme.groupedBackground,
-      appBar: AdaptiveAppBar(
-        title: l10n.you,
-        leading: backButton == null || context.usesCupertinoChrome
-            ? backButton
-            : Center(
-                child: SizedBox.square(
-                  dimension: TouchTarget.minimum,
-                  child: backButton,
-                ),
-              ),
+    final backButton = AdaptiveTooltip(
+      message: backLabel,
+      child: ConduitAdaptiveAppBarIconButton(
+        icon: context.usesCupertinoChrome
+            ? CupertinoIcons.chevron_back
+            : Icons.arrow_back,
+        semanticLabel: backLabel,
+        onPressed: leave,
       ),
-      body: body,
+    );
+
+    return PopScope(
+      canPop: canPop,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) leave();
+      },
+      child: AdaptiveRouteShell(
+        backgroundColor: context.conduitTheme.groupedBackground,
+        appBar: AdaptiveAppBar(
+          title: l10n.you,
+          leading: context.usesCupertinoChrome
+              ? backButton
+              : Center(
+                  child: SizedBox.square(
+                    dimension: TouchTarget.minimum,
+                    child: backButton,
+                  ),
+                ),
+        ),
+        body: body,
+      ),
     );
   }
 
