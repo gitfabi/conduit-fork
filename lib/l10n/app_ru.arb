@@ -61,6 +61,7 @@
   "noItems": "Нет элементов",
   "noItemsToDisplay": "Нет элементов для отображения",
   "knowledgeBase": "База знаний",
+  "knowledgeUseEntireBase": "Использовать всю базу знаний",
   "attachments": "Вложения",
   "files": "Файлы",
   "takePhoto": "Сделать фото",

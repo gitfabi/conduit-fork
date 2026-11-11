@@ -55,6 +55,7 @@
   "noItems": "Keine Elemente",
   "noItemsToDisplay": "Keine Elemente zum Anzeigen",
   "knowledgeBase": "Wissensdatenbank",
+  "knowledgeUseEntireBase": "Gesamte Wissensdatenbank verwenden",
   "attachments": "Anhänge",
   "files": "Dateien",
   "takePhoto": "Foto aufnehmen",

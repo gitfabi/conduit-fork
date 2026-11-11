@@ -381,6 +381,7 @@
     "description": "Alternative empty-state description."
   },
   "knowledgeBase": "Baza wiedzy",
+  "knowledgeUseEntireBase": "Użyj całej bazy wiedzy",
   "@knowledgeBase": {
     "description": "Section for knowledge base content."
   },

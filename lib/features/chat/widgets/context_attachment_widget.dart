@@ -48,6 +48,8 @@ class ContextAttachmentWidget extends ConsumerWidget {
       case ChatContextAttachmentType.youtube:
         return Icons.play_circle_outline;
       case ChatContextAttachmentType.knowledge:
+        return Icons.description_outlined;
+      case ChatContextAttachmentType.knowledgeBase:
         return Icons.folder_outlined;
       case ChatContextAttachmentType.note:
         return Icons.sticky_note_2_outlined;

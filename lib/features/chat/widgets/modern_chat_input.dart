@@ -2275,9 +2275,15 @@ class _ModernChatInputState extends ConsumerState<ModernChatInput>
             );
         break;
       case _ComposerContextSuggestionType.knowledgeBase:
-        _hidePromptOverlay();
-        unawaited(_openKnowledgePicker(initialBaseId: suggestion.id));
-        return;
+        // Like the web client, `#` on a knowledge base attaches all of it;
+        // single files stay selectable from the same list and the picker.
+        ref
+            .read(contextAttachmentsProvider.notifier)
+            .addKnowledgeBase(
+              baseId: suggestion.id,
+              displayName: suggestion.displayName,
+            );
+        break;
       case _ComposerContextSuggestionType.knowledgeFile:
         ref
             .read(contextAttachmentsProvider.notifier)
@@ -2871,9 +2877,47 @@ class _ModernChatInputState extends ConsumerState<ModernChatInput>
                                       child: AdaptiveProgressIndicator(),
                                     )
                                   : ListView.builder(
-                                      itemCount: files.length,
+                                      itemCount: files.length + 1,
                                       itemBuilder: (context, index) {
-                                        final file = files[index];
+                                        if (index == 0) {
+                                          return AdaptiveListTile(
+                                            key: const Key(
+                                              'knowledge-use-entire-base',
+                                            ),
+                                            leading: const Icon(
+                                              Icons.folder_outlined,
+                                            ),
+                                            title: Text(
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.knowledgeUseEntireBase,
+                                            ),
+                                            onTap: () {
+                                              final base = bases
+                                                  .where(
+                                                    (b) =>
+                                                        b.id == selectedBaseId,
+                                                  )
+                                                  .firstOrNull;
+                                              if (base == null) return;
+                                              innerRef
+                                                  .read(
+                                                    contextAttachmentsProvider
+                                                        .notifier,
+                                                  )
+                                                  .addKnowledgeBase(
+                                                    baseId: base.id,
+                                                    displayName: base.name,
+                                                  );
+                                              if (modalContext.mounted) {
+                                                Navigator.of(
+                                                  modalContext,
+                                                ).pop();
+                                              }
+                                            },
+                                          );
+                                        }
+                                        final file = files[index - 1];
                                         final KnowledgeBase? selectedBase =
                                             bases.isEmpty
                                             ? null
