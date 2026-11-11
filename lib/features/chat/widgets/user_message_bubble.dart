@@ -16,6 +16,7 @@ import 'package:conduit_core/utils/debug_logger.dart';
 
 import '../../../shared/theme/conduit_input_styles.dart';
 import '../../../shared/theme/theme_extensions.dart';
+import 'message_timestamp_label.dart';
 import '../../../shared/utils/conversation_context_menu.dart';
 import '../../../shared/utils/file_type_utils.dart';
 import '../../../shared/utils/locale_display_formatters.dart';
@@ -834,6 +835,7 @@ class _UserMessageBubbleState extends ConsumerState<UserMessageBubble> {
       Radius.circular(AppBorderRadius.chatBubble),
     );
     final actions = _buildMessageActions(context);
+    final timestamp = messageTimestampOf(widget.message);
     final attachmentContent = hasFilesFromArray
         ? _buildUserFileImages(filePartitions!)
         : hasImages
@@ -940,6 +942,14 @@ class _UserMessageBubbleState extends ConsumerState<UserMessageBubble> {
                 ),
               ],
             ),
+
+          if (hasText && !_isEditing && timestamp != null) ...[
+            const SizedBox(height: Spacing.xxs),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: Spacing.xs),
+              child: MessageTimestampLabel(timestamp: timestamp),
+            ),
+          ],
 
           // Edit action buttons - show Save/Cancel when editing
           if (_isEditing) ...[
