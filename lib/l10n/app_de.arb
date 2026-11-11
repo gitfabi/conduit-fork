@@ -165,6 +165,8 @@
   "voiceActionStop": "Stopp",
   "voiceActionStart": "Starten",
   "messageHintText": "Frag Conduit",
+  "messageHintModel": "Nachricht an {model}",
+  "@messageHintModel": {"placeholders": {"model": {"type": "String"}}},
   "stopGenerating": "Generierung stoppen",
   "codeCopiedToClipboard": "Code in die Zwischenablage kopiert.",
   "send": "Senden",

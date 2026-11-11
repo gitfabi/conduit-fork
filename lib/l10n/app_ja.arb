@@ -660,6 +660,8 @@
     "description": "Guidance shown when the voice call encounters an error."
   },
   "messageHintText": "Conduit に質問",
+  "messageHintModel": "{model}にメッセージ",
+  "@messageHintModel": {"placeholders": {"model": {"type": "String"}}},
   "@messageHintText": {
     "description": "Short placeholder text in the message input."
   },

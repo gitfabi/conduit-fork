@@ -165,6 +165,8 @@
   "voiceActionStop": "Arrêter",
   "voiceActionStart": "Démarrer",
   "messageHintText": "Demander à Conduit",
+  "messageHintModel": "Message à {model}",
+  "@messageHintModel": {"placeholders": {"model": {"type": "String"}}},
   "stopGenerating": "Arrêter la génération",
   "codeCopiedToClipboard": "Code copié dans le presse-papiers.",
   "send": "Envoyer",

@@ -165,6 +165,8 @@
   "voiceActionStop": "停止",
   "voiceActionStart": "开始",
   "messageHintText": "问 Conduit",
+  "messageHintModel": "给 {model} 发消息",
+  "@messageHintModel": {"placeholders": {"model": {"type": "String"}}},
   "stopGenerating": "停止生成",
   "codeCopiedToClipboard": "代码已复制到剪贴板。",
   "send": "发送",

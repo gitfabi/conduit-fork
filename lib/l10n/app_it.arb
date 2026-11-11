@@ -165,6 +165,8 @@
   "voiceActionStop": "Stop",
   "voiceActionStart": "Avvia",
   "messageHintText": "Chiedi a Conduit",
+  "messageHintModel": "Scrivi a {model}",
+  "@messageHintModel": {"placeholders": {"model": {"type": "String"}}},
   "stopGenerating": "Interrompi generazione",
   "codeCopiedToClipboard": "Codice copiato negli appunti.",
   "send": "Invia",

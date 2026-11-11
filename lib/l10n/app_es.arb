@@ -165,6 +165,8 @@
   "voiceActionStop": "Detener",
   "voiceActionStart": "Iniciar",
   "messageHintText": "Pregunta a Conduit",
+  "messageHintModel": "Mensaje a {model}",
+  "@messageHintModel": {"placeholders": {"model": {"type": "String"}}},
   "stopGenerating": "Detener generación",
   "codeCopiedToClipboard": "Código copiado al portapapeles.",
   "send": "Enviar",
